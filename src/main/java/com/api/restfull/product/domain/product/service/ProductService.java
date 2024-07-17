@@ -19,4 +19,9 @@ public interface ProductService {
 
     @Transactional
     ProductResponse getProductById(Long id);
+
+    @Transactional
+    ProductResponse updateProduct(Long id, ProductRequest request);
+
+    void deleteProduct(Long id);
 }

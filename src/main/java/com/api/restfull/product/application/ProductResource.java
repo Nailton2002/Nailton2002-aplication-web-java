@@ -2,6 +2,7 @@ package com.api.restfull.product.application;
 
 import com.api.restfull.product.domain.product.dto.request.ProductRequest;
 import com.api.restfull.product.domain.product.dto.response.ProductResponse;
+import com.api.restfull.product.domain.product.entity.Product;
 import com.api.restfull.product.domain.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
@@ -39,4 +40,18 @@ public class ProductResource {
         ProductResponse dto = service.getProductById(id);
         return ResponseEntity.ok().body(dto);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @RequestBody ProductRequest request) {
+        request.setId(id);
+        ProductResponse updatedProduct = service.updateProduct(id, request);
+        return ResponseEntity.ok(updatedProduct);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        service.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
 }
+
