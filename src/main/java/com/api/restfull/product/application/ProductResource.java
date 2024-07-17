@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @Profile("dev")
 @RestController
@@ -21,9 +22,15 @@ public class ProductResource {
     private final ProductService service;
 
     @PostMapping
-    public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest request) {
-        ProductResponse response = service.create(request);
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest request) {
+        ProductResponse response = service.createProduct(request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(request.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> getAllProducts() {
+        List<ProductResponse> list = service.getAllProducts();
+        return ResponseEntity.ok().body(list);
     }
 }

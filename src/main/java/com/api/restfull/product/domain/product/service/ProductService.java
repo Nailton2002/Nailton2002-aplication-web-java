@@ -12,6 +12,8 @@ import java.util.List;
 public interface ProductService {
 
     @Transactional
-    ProductResponse create(ProductRequest request);
+    ProductResponse createProduct(ProductRequest request);
 
+    @Transactional
+    List<ProductResponse> getAllProducts();
 }
