@@ -16,4 +16,7 @@ public interface ProductService {
 
     @Transactional
     List<ProductResponse> getAllProducts();
+
+    @Transactional
+    ProductResponse getProductById(Long id);
 }

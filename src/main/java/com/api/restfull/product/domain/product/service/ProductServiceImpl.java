@@ -4,6 +4,7 @@ import com.api.restfull.product.domain.product.dto.request.ProductRequest;
 import com.api.restfull.product.domain.product.dto.response.ProductResponse;
 import com.api.restfull.product.domain.product.entity.Product;
 import com.api.restfull.product.domain.product.repository.ProductRepository;
+import com.api.restfull.product.infra.validations.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,12 @@ public class ProductServiceImpl implements ProductService{
         List<Product> list = productRepository.findAll();
         List<ProductResponse> responseList = list.stream().map(product -> ProductResponse.fromEntityToDto(product)).collect(Collectors.toList());
         return responseList;
+    }
+
+    @Override
+    public ProductResponse getProductById(Long id) {
+        Product obj = productRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(
+            "Objeto não encontrado! Id: " + id + ", Tipo: " + ProductResponse.class.getName()));
+        return ProductResponse.fromEntityToDto(obj);
     }
 }

@@ -33,4 +33,10 @@ public class ProductResource {
         List<ProductResponse> list = service.getAllProducts();
         return ResponseEntity.ok().body(list);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> findById(@PathVariable Long id) {
+        ProductResponse dto = service.getProductById(id);
+        return ResponseEntity.ok().body(dto);
+    }
 }
