@@ -4,6 +4,7 @@ import com.api.restfull.product.domain.product.dto.request.ProductRequest;
 import com.api.restfull.product.domain.product.dto.response.ProductResponse;
 import com.api.restfull.product.domain.product.entity.Product;
 import com.api.restfull.product.domain.product.repository.ProductRepository;
+import com.api.restfull.product.infra.validations.ObjectNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -113,10 +115,30 @@ class ProductServiceImplTest {
     @Test
     void testGetProductById_Success() {
 
+        // Configuração do mock para retornar um produto específico
+        when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
+
+        // Chamada do método de serviço
+        ProductResponse response = productService.getProductById(1L);
+
+        // Verificação dos resultados
+        assertEquals(productResponse.getId(), response.getId());
+        verify(productRepository, times(1)).findById(anyLong());
     }
 
     @Test
-    void getProductById() {
+    void testGetProductById_NotFound() {
+        // Configuração do mock para retornar uma exceção quando o produto não for encontrado
+        when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        // Verificação de exceção
+        Exception exception = assertThrows(ObjectNotFoundException.class, () -> {
+            productService.getProductById(1L);
+        });
+
+        // Verificação da mensagem de exceção
+        assertEquals("Service ou ID não encontrado -> Id Objeto não encontrado! Id: 1, Tipo: com.api.restfull.product.domain.product.dto.response.ProductResponse", exception.getMessage());
+        verify(productRepository, times(1)).findById(anyLong());
     }
 
     @Test
