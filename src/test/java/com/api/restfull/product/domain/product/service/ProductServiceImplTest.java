@@ -11,6 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,7 +43,7 @@ class ProductServiceImplTest {
 
         product = new Product();
         product.setId(1L);
-        product.setNome("Test Product");
+        product.setNome("Teste Product");
         product.setQuantidade(3);
         product.setValor(100.0);
 
@@ -51,7 +54,7 @@ class ProductServiceImplTest {
 
         productResponse = new ProductResponse();
         productResponse.setId(1L);
-        productResponse.setNome("Test Product");
+        productResponse.setNome("Teste Product");
         productResponse.setQuantidade(3);
         productResponse.setValor(100.0);
     }
@@ -91,7 +94,25 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void getAllProducts() {
+    void testGetAllProducts_Success() {
+
+        // Configuração do mock para retornar uma lista de produtos
+        List<Product> productList = new ArrayList<>();
+        productList.add(product);
+        when(productRepository.findAll()).thenReturn(productList);
+
+        // Chamada do método de serviço
+        List<ProductResponse> responseList = productService.getAllProducts();
+
+        // Verificação dos resultados
+        assertEquals(1, responseList.size());
+        assertEquals(productResponse.getId(), responseList.get(0).getId());
+        verify(productRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testGetProductById_Success() {
+
     }
 
     @Test
