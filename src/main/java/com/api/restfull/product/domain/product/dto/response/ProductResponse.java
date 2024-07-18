@@ -2,11 +2,13 @@ package com.api.restfull.product.domain.product.dto.response;
 
 import com.api.restfull.product.domain.product.dto.request.ProductRequest;
 import com.api.restfull.product.domain.product.entity.Product;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
 @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductResponse {
 
     private Long id;
