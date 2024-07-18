@@ -50,6 +50,7 @@ class ProductServiceImplTest {
         product.setValor(100.0);
 
         productRequest = new ProductRequest();
+        productRequest.setId(1L);
         productRequest.setNome("Teste Product");
         productRequest.setQuantidade(3);
         productRequest.setValor(100.0);
@@ -144,21 +145,35 @@ class ProductServiceImplTest {
     @Test
     void testUpdateProduct_Success() {
 
-        // Configuração do mock para retornar um produto existente
+        // Configura o mock para retornar um produto existente
+        when(productRepository.findById(productRequest.getId())).thenReturn(Optional.of(product));
+        when(productRepository.save(any(Product.class))).thenReturn(product);
 
-        // Chamada do método de serviço
+        // Chama o método de serviço
+        ProductResponse response = productService.updateProduct(1L, productRequest);
 
-        // Verificação dos resultados
+        // Verifica os resultados
+        assertEquals(productResponse.getId(), response.getId());
+        verify(productRepository, times(1)).findById(productRequest.getId());
+        verify(productRepository, times(1)).save(any(Product.class));
     }
 
     @Test
     void testUpdateProduct_NotFound() {
 
-        // Configuração do mock para retornar uma exceção quando o produto não for encontrado
+        // Configura o mock para retornar vazio (ID do produto não encontrado)
+        when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        // Verificação de exceção
+        // Verifica se a exceção ObjectNotFoundException é lançada
+        Exception exception = assertThrows(ObjectNotFoundException.class, () -> {
+            // Chama o método de serviço com um ID que não existe
+            productService.updateProduct(1L, productRequest);
+        });
 
-        // Verificação da mensagem de exceção
+        // Verifica a mensagem da exceção
+        assertEquals("Service ou ID não encontrado -> Id Usuário não encontrado com o ID: 1", exception.getMessage());
+        // Verifica se o método findById foi chamado uma vez com qualquer valor de Long
+        verify(productRepository, times(1)).findById(anyLong());
     }
 
     @Test
