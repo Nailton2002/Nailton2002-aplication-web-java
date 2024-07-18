@@ -96,7 +96,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void testGetAllProducts_Success() {
+    void testGetAllProducts() {
 
         // Configuração do mock para retornar uma lista de produtos
         List<Product> productList = new ArrayList<>();
@@ -142,10 +142,35 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void updateProduct() {
+    void testUpdateProduct_Success() {
+
+        // Configuração do mock para retornar um produto existente
+
+        // Chamada do método de serviço
+
+        // Verificação dos resultados
     }
 
     @Test
-    void deleteProduct() {
+    void testUpdateProduct_NotFound() {
+
+        // Configuração do mock para retornar uma exceção quando o produto não for encontrado
+
+        // Verificação de exceção
+
+        // Verificação da mensagem de exceção
+    }
+
+    @Test
+    void testDeleteProduct() {
+
+        // Configuração do mock para verificar a chamada de exclusão
+        doNothing().when(productRepository).deleteById(anyLong());
+
+        // Chamada do método de serviço
+        productService.deleteProduct(1L);
+
+        // Verificação da chamada do método de exclusão
+        verify(productRepository, times(1)).deleteById(anyLong());
     }
 }
