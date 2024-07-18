@@ -1,0 +1,12 @@
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\application\ProductResource.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\domain\product\dto\request\ProductRequest.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\domain\product\dto\response\ProductResponse.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\domain\product\entity\Product.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\domain\product\repository\ProductRepository.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\domain\product\service\ProductService.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\domain\product\service\ProductServiceImpl.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\infra\exceptions\ResourceExceptionHandler.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\infra\exceptions\StandardError.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\infra\validations\ObjectBadRequestException.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\infra\validations\ObjectNotFoundException.java
+E:\IdeaProjects-api\product\src\main\java\com\api\restfull\product\ProductApplication.java
