@@ -1,0 +1,15 @@
+com\api\restfull\product\infra\validations\ObjectBadRequestException.class
+com\api\restfull\product\infra\exceptions\StandardError.class
+com\api\restfull\product\application\ProductResource.class
+com\api\restfull\product\domain\product\entity\Product.class
+com\api\restfull\product\domain\product\dto\request\ProductRequest.class
+com\api\restfull\product\ProductApplication.class
+com\api\restfull\product\domain\product\dto\response\ProductResponse$ProductResponseBuilder.class
+com\api\restfull\product\infra\validations\ObjectNotFoundException.class
+com\api\restfull\product\domain\product\service\ProductService.class
+com\api\restfull\product\infra\exceptions\ResourceExceptionHandler.class
+com\api\restfull\product\domain\product\dto\response\ProductResponse.class
+com\api\restfull\product\domain\product\entity\Product$ProductBuilder.class
+com\api\restfull\product\domain\product\repository\ProductRepository.class
+com\api\restfull\product\domain\product\dto\request\ProductRequest$ProductRequestBuilder.class
+com\api\restfull\product\domain\product\service\ProductServiceImpl.class
